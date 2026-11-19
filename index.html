@@ -95,15 +95,15 @@ textarea:focus{outline:none;border-color:var(--lime)}
 "use strict";
 
 var QUESTS = [
- {id:1,name:"MIXOLOGIE",sub:"Trust issues?",
-  body:["Misiunea ta este sa comanzi urmatoarea bautura pentru celalalt.",
+ {id:1,name:"?",sub:"Trust issues?",
+  body:["Trebuie sa comanzi urmatoarea bautura pentru celalalt.",
         "Ai voie sa pui <span class='hl'>3 intrebari</span> ca sa iti dai seama ce i-ar placea. Nu ai voie sa intrebi ce comanda de obicei.",
-        "Celalalt are dreptul la veto. Nu si la consultanta."],
+        "Celalalt are dreptul sa refuze doar o singura data."],
   cta:"BAUTURA COMANDATA"},
  {id:2,name:"PHOTO MODE",sub:"Dovada ca am fost aici.",
   body:["Fa o fotografie cu ceva care reprezinta seara de pana acum.",
         "<span class='hl'>Fara selfie. Fara retake. Fara explicatii momentan.</span>"],
-  note:"Butonul doar marcheaza provocarea drept completata. Fotografia o faci cu aparatul tau.",
+  note:"Butonul doar marcheaza provocarea drept completata. Fotografia o faci cu aparatul asta.",
   cta:"CAPTURE THE MOMENT"},
  {id:3,name:"LORE UNLOCKED",sub:"Asta suna inventat.",
   body:["Spune o poveste despre tine care suna complet inventata, dar este <span class='hl'>100% adevarata</span>.",
@@ -111,26 +111,26 @@ var QUESTS = [
   cta:"UNLOCK LORE"},
  {id:4,name:"DAMAGE REPORT",sub:"Experienta acumulata.",
   body:["Povesteste cel mai bun si cel mai prost date la care ai fost.",
-        "Bonus: ce ai invatat din cel prost? Sau nu ai invatat nimic?"],
+        "Bonus: ce ai invatat din cel prost? Si ce ai invatat din cel bun?"],
   cta:"DEPUNE MARTURIA"}
 ];
 
 var EVENTS = [
  ["Identitati noi","Dati-va reciproc cate un nickname. Trebuie folosit pana la finalul serii. Nu aveti dreptul sa il schimbati, indiferent cat de prost este."],
  ["Recenzie preliminara","Descrieti seara de pana acum in doar 3 cuvinte. Dezvaluiti simultan."],
- ["Ick detector","Care este cel mai stupid ick pe care l-ai avut la un prim date? Si care este unul pe care il recunosti ca e complet absurd?"],
- ["Opinii publice","Sarut la primul date: green flag, red flag sau depinde? Si ce te-ar face sa vrei sau sa nu vrei?"],
+ ["Ick detector","Care este cel mai stupid ick pe care l-ai avut la un prim date?"],
+ ["Opinii publice","Sarut la 1st date: green flag, red flag sau depinde?"],
  ["Prea devreme sa spunem","Care a fost prima impresie pe care ai avut-o despre mine? Si ce crezi acum ca ai aflat ceva mai mult?"],
- ["Schimb de roluri","Timp de 2 minute, tu trebuie sa fii eu si eu trebuie sa fiu tu. Imitati-va reciproc. Fara mila, dar nici fara respect."],
- ["Red flag marketplace","Spune un red flag de-al tau pe care il vinzi ca si cum ar fi green flag. Celalalt decide daca te crede."],
+ ["Schimb de roluri","Timp de 2 minute, tu trebuie sa fii eu si eu trebuie sa fiu tu. Imitati-va reciproc."],
+ ["Red flag ","Spune un red flag pe care l-ai observat la mine si un green flag daca exista :))))"],
  ["Un lucru suspect","Ceva ce ai observat la mine pana acum, dar nu ai spus cu voce tare."]
 ];
 
 var HIDDEN = [
  ["Prediction market","Ce crezi ca o sa afli despre mine pana la finalul serii?"],
- ["Unpopular attraction","Ce trasatura te atrage la cineva si nu e neaparat ceva fizic?"],
+ ["Unpopular attraction","Mirositi-va reciproc parfumulrile si spuneti o parere"],
  ["Dating hot take","Ce lucru este normal in dating, dar tie nu iti place deloc?"],
- ["Your type, unfortunately","Descrie tipul tau de persoana. Eu ma incadrez undeva sau sunt complet pe langa?"],
+ ["Desenul copilariei","Care este desenul preferat al copilariei, sau faceti un top."],
  ["Risky question","Ce intrebare ai vrut sa imi pui pana acum, dar n-ai avut momentul?"]
 ];
 

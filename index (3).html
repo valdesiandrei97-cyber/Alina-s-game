@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f09">
+<title>SESSION 001 / IRL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f09; --surface:#161a0e; --line:#2a3018; --text:#e8ecd8; --muted:#8b9378;
+  --lime:#c6f432; --olive:#7d8f2a; --warn:#ff5d4a;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(60% 40% at 50% 0%,rgba(198,244,50,.07),transparent 70%)}
+#app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:28px 20px 60px;min-height:100%}
+.top{display:flex;justify-content:space-between;align-items:center;font:12px var(--mono);color:var(--muted);margin-bottom:36px}
+.dots{display:flex;gap:6px}
+.dots i{width:9px;height:9px;border:1px solid var(--olive);border-radius:50%}
+.dots i.on{background:var(--lime);border-color:var(--lime);box-shadow:0 0 8px var(--lime)}
+.screen{animation:in .45s ease both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1,h2{font-weight:700;letter-spacing:-.02em;line-height:1.05}
+h1{font-size:clamp(34px,10vw,52px)}
+h2{font-size:clamp(26px,7vw,34px);margin-bottom:18px}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden;opacity:.8}
+.glitch::before{color:var(--lime);animation:g1 3.2s infinite steps(1)}
+.glitch::after{color:var(--warn);animation:g2 3.2s infinite steps(1)}
+@keyframes g1{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}93%{transform:translate(-3px,1px);clip-path:inset(20% 0 55% 0)}96%{transform:translate(2px,-1px);clip-path:inset(60% 0 10% 0)}}
+@keyframes g2{0%,93%,100%{transform:none;clip-path:inset(0 0 100% 0)}94%{transform:translate(3px,0);clip-path:inset(45% 0 30% 0)}97%{transform:translate(-2px,1px);clip-path:inset(5% 0 75% 0)}}
+body.shake #app{animation:shake .5s steps(2)}
+body.shake::after{background:linear-gradient(90deg,rgba(255,93,74,.14),rgba(198,244,50,.14))}
+@keyframes shake{0%{transform:translate(0)}20%{transform:translate(-6px,2px) skewX(3deg)}40%{transform:translate(5px,-2px)}60%{transform:translate(-4px,1px) skewX(-2deg)}100%{transform:none}}
+.lead{color:var(--muted);font-size:18px;margin:22px 0 34px}
+.lead b{color:var(--text);font-weight:500}
+.tag{font:12px var(--mono);color:var(--lime);margin-bottom:10px}
+.btn{display:block;width:100%;background:var(--lime);color:#10130a;border:0;border-radius:10px;
+  padding:16px 18px;font:700 15px var(--mono);cursor:pointer;margin-top:12px;transition:transform .15s,box-shadow .15s}
+.btn:hover{box-shadow:0 0 22px rgba(198,244,50,.45)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--lime);border:1px solid var(--olive)}
+.btn.ghost:hover{background:rgba(198,244,50,.07)}
+.btn:focus-visible,.card:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.rules{list-style:none;padding:0;border-left:2px solid var(--olive);margin:0 0 20px}
+.rules li{padding:10px 0 10px 16px;font-size:17px}
+.note{color:var(--muted);margin-bottom:26px}
+.card{display:block;width:100%;text-align:left;background:var(--surface);color:var(--text);
+  border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;cursor:pointer;
+  font-family:var(--sans);transition:border-color .2s,transform .15s}
+.card:hover{border-color:var(--olive)}
+.card:active{transform:scale(.985)}
+.card .row{display:flex;justify-content:space-between;align-items:center;font:12px var(--mono);margin-bottom:6px}
+.card .name{color:var(--lime)}
+.card .st{color:var(--muted)}
+.card.done{opacity:.55}
+.card.done .st{color:var(--lime)}
+.card strong{display:block;font-size:19px;font-weight:500}
+.card span.d{color:var(--muted);font-size:15px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:8px}
+.panel p{margin-bottom:12px;font-size:17px}
+.panel p:last-child{margin-bottom:0}
+.panel .hl{color:var(--lime)}
+.fine{font:12px var(--mono);color:var(--muted);margin-top:14px}
+.event{border-color:var(--olive);box-shadow:inset 0 0 0 1px rgba(198,244,50,.12)}
+.event h2{font-size:24px;margin-bottom:12px}
+.load{font:14px var(--mono);color:var(--lime);padding:70px 0;text-align:center}
+.load small{display:block;color:var(--warn);margin-top:14px;animation:blink .5s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sep{height:1px;background:var(--line);margin:22px 0}
+.end{text-align:center;padding-top:50px}
+.end h2{margin-bottom:12px}
+textarea{width:100%;min-height:110px;background:var(--bg);color:var(--text);border:1px solid var(--line);
+  border-radius:10px;padding:14px;font:16px var(--sans);resize:vertical;margin-top:14px}
+textarea:focus{outline:none;border-color:var(--lime)}
+@media (prefers-reduced-motion:reduce){
+  .screen,.glitch::before,.glitch::after,body.shake #app,.load small{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+"use strict";
+
+var QUESTS = [
+ {id:1,name:"MIXOLOGIE",sub:"Trust issues?",
+  body:["Misiunea ta este sa comanzi urmatoarea bautura pentru celalalt.",
+        "Ai voie sa pui <span class='hl'>3 intrebari</span> ca sa iti dai seama ce i-ar placea. Nu ai voie sa intrebi ce comanda de obicei.",
+        "Celalalt are dreptul la veto. Nu si la consultanta."],
+  cta:"BAUTURA COMANDATA"},
+ {id:2,name:"PHOTO MODE",sub:"Dovada ca am fost aici.",
+  body:["Fa o fotografie cu ceva care reprezinta seara de pana acum.",
+        "<span class='hl'>Fara selfie. Fara retake. Fara explicatii momentan.</span>"],
+  note:"Butonul doar marcheaza provocarea drept completata. Fotografia o faci cu aparatul tau.",
+  cta:"CAPTURE THE MOMENT"},
+ {id:3,name:"LORE UNLOCKED",sub:"Asta suna inventat.",
+  body:["Spune o poveste despre tine care suna complet inventata, dar este <span class='hl'>100% adevarata</span>.",
+        "Nu ai voie sa spui \"nu am\"."],
+  cta:"UNLOCK LORE"},
+ {id:4,name:"DAMAGE REPORT",sub:"Experienta acumulata.",
+  body:["Povesteste cel mai bun si cel mai prost date la care ai fost.",
+        "Bonus: ce ai invatat din cel prost? Sau nu ai invatat nimic?"],
+  cta:"DEPUNE MARTURIA"}
+];
+
+var EVENTS = [
+ ["Identitati noi","Dati-va reciproc cate un nickname. Trebuie folosit pana la finalul serii. Nu aveti dreptul sa il schimbati, indiferent cat de prost este."],
+ ["Recenzie preliminara","Descrieti seara de pana acum in doar 3 cuvinte. Dezvaluiti simultan."],
+ ["Ick detector","Care este cel mai stupid ick pe care l-ai avut la un prim date? Si care este unul pe care il recunosti ca e complet absurd?"],
+ ["Opinii publice","Sarut la primul date: green flag, red flag sau depinde? Si ce te-ar face sa vrei sau sa nu vrei?"],
+ ["Prea devreme sa spunem","Care a fost prima impresie pe care ai avut-o despre mine? Si ce crezi acum ca ai aflat ceva mai mult?"],
+ ["Schimb de roluri","Timp de 2 minute, tu trebuie sa fii eu si eu trebuie sa fiu tu. Imitati-va reciproc. Fara mila, dar nici fara respect."],
+ ["Red flag marketplace","Spune un red flag de-al tau pe care il vinzi ca si cum ar fi green flag. Celalalt decide daca te crede."],
+ ["Un lucru suspect","Ceva ce ai observat la mine pana acum, dar nu ai spus cu voce tare."]
+];
+
+var HIDDEN = [
+ ["Prediction market","Ce crezi ca o sa afli despre mine pana la finalul serii?"],
+ ["Unpopular attraction","Ce trasatura te atrage la cineva si nu e neaparat ceva fizic?"],
+ ["Dating hot take","Ce lucru este normal in dating, dar tie nu iti place deloc?"],
+ ["Your type, unfortunately","Descrie tipul tau de persoana. Eu ma incadrez undeva sau sunt complet pe langa?"],
+ ["Risky question","Ce intrebare ai vrut sa imi pui pana acum, dar n-ai avut momentul?"]
+];
+
+var app = document.getElementById("app");
+var state = {done:{}, usedEvents:[], hiddenSeen:false, hiddenDone:false};
+var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function doneCount(){ return Object.keys(state.done).length; }
+
+function topbar(){
+  var d = "";
+  for(var i=1;i<=4;i++) d += "<i class='" + (state.done[i] ? "on" : "") + "'></i>";
+  return "<div class='top'><span>SESSION 001 / IRL</span><span class='dots' aria-label='Progres quest-uri'>" + d + "</span></div>";
+}
+
+function render(html, withTop){
+  app.innerHTML = (withTop ? topbar() : "") + "<div class='screen'>" + html + "</div>";
+  window.scrollTo(0,0);
+  var f = app.querySelector(".btn, .card");
+  if(f && f.focus) f.focus({preventScroll:true});
+}
+
+function shake(){
+  if(reduce) return;
+  document.body.classList.add("shake");
+  setTimeout(function(){document.body.classList.remove("shake");}, 520);
+}
+
+/* ---------- screens ---------- */
+function start(){
+  app.innerHTML = "<div class='top'><span>SESSION 001 / IRL</span><span>v1.0</span></div><div class='screen' style='padding-top:40px'>" +
+    "<p class='tag'>SESSION 001 / IRL</p>" +
+    "<h1><span class='glitch' data-t='Deci nu stim nimic unul despre celalalt :)))'>Deci nu stim nimic unul despre celalalt :)))</span></h1>" +
+    "<p class='lead'>Hai sa vedem daca asta e o problema.<br><b>Da START cand esti pregatita.</b></p>" +
+    "<button class='btn' data-act='rules'>[ START ]</button></div>";
+}
+
+function rules(){
+  render("<p class='tag'>RULES OF ENGAGEMENT</p><h2>Reguli</h2>" +
+    "<ul class='rules'><li>Nu te gandi prea mult.</li><li>Nu poti refuza quest-ul.</li>" +
+    "<li>Nu exista puncte. Nimeni nu castiga.</li><li>Side quests pot aparea fara avertisment.</li>" +
+    "<li>Ai dreptul sa judeci, dar nu sa te plangi.</li></ul>" +
+    "<p class='note'>In mare, incearca sa nu fii plictisitoare.</p>" +
+    "<button class='btn' data-act='board'>[ AM INTELES ]</button>", true);
+}
+
+function board(){
+  var h = "<p class='tag'>QUEST BOARD</p><h2>Alege un quest</h2>";
+  QUESTS.forEach(function(q){
+    var d = state.done[q.id];
+    h += "<button class='card" + (d ? " done" : "") + "' data-act='quest' data-id='" + q.id + "'>" +
+      "<div class='row'><span class='name'>QUEST 0" + q.id + " - " + q.name + "</span><span class='st'>" + (d ? "Completat" : "Disponibil") + "</span></div>" +
+      "<strong>" + q.sub + "</strong></button>";
+  });
+  h += "<div class='sep'></div>" +
+    "<button class='btn ghost' data-act='event'>[ ??? DECLANSEAZA UN EVENIMENT ??? ]</button>";
+  if(state.hiddenDone || doneCount() === 4 && state.hiddenSeen){
+    h += "<button class='btn' data-act='final'>[ INCHEIE SESIUNEA ]</button>";
+  } else {
+    h += "<button class='btn ghost' data-act='final' style='border-color:var(--line);color:var(--muted)'>[ INCHEIE JOCUL ]</button>";
+  }
+  render(h, true);
+}
+
+function quest(id){
+  var q = QUESTS[id-1];
+  var h = "<p class='tag'>QUEST 0" + q.id + " - " + q.name + "</p><h2>" + q.sub + "</h2><div class='panel'>";
+  q.body.forEach(function(p){ h += "<p>" + p + "</p>"; });
+  h += "</div>";
+  if(q.note) h += "<p class='fine'>" + q.note + "</p>";
+  h += "<button class='btn' data-act='complete' data-id='" + q.id + "'>[ " + q.cta + " ]</button>" +
+       "<button class='btn ghost' data-act='board'>[ INAPOI LA QUEST BOARD ]</button>";
+  render(h, true);
+}
+
+function complete(id){
+  state.done[id] = true;
+  shake();
+  if(doneCount() === 4 && !state.hiddenSeen){ hidden(); return; }
+  board();
+}
+
+function event(){
+  var left = [];
+  EVENTS.forEach(function(e,i){ if(state.usedEvents.indexOf(i) < 0) left.push(i); });
+  if(!left.length){
+    render("<p class='tag'>RANDOM EVENT</p><h2>Gol.</h2><div class='panel'><p>Ai epuizat toate evenimentele din sesiunea asta. Nu se repeta.</p></div>" +
+      "<button class='btn' data-act='board'>[ BACK TO QUEST BOARD ]</button>", true);
+    return;
+  }
+  var i = left[Math.floor(Math.random()*left.length)];
+  state.usedEvents.push(i);
+  shake();
+  var n = state.usedEvents.length;
+  render("<p class='tag'>RANDOM EVENT - " + n + "/" + EVENTS.length + "</p>" +
+    "<div class='panel event'><h2>" + EVENTS[i][0] + "</h2><p>" + EVENTS[i][1] + "</p></div>" +
+    "<button class='btn' data-act='event'>[ NEXT EVENT ]</button>" +
+    "<button class='btn ghost' data-act='board'>[ BACK TO QUEST BOARD ]</button>", true);
+}
+
+function hidden(){
+  state.hiddenSeen = true;
+  shake();
+  render("<div class='load'>... ANALYZING SESSION ...<small>UNEXPECTED CONNECTION DETECTED</small></div>", true);
+  setTimeout(function(){
+    shake();
+    var h = "<p class='tag'>HIDDEN QUEST - Nu era in plan</p><h2>Se pare ca ai de facut ceva in plus.</h2>" +
+      "<p class='note'>Alege una:</p>";
+    HIDDEN.forEach(function(x,i){
+      h += "<button class='card' data-act='hpick' data-id='" + i + "'><strong>" + x[0] + "</strong><span class='d'>" + x[1] + "</span></button>";
+    });
+    render(h, true);
+  }, reduce ? 900 : 2200);
+}
+
+function hpick(i){
+  state.hiddenDone = true;
+  render("<p class='tag'>HIDDEN QUEST - " + HIDDEN[i][0] + "</p>" +
+    "<div class='panel event'><p>" + HIDDEN[i][1] + "</p></div>" +
+    "<button class='btn' data-act='board'>[ AM RASPUNS ]</button>", true);
+}
+
+function final(){
+  render("<p class='tag'>FINAL QUEST - One last thing</p><h2>UN LAST LUCRU.</h2>" +
+    "<div class='panel'><p>Care este un lucru din seara asta pe care chiar crezi ca ti-l vei aminti maine?</p></div>" +
+    "<textarea id='last' placeholder='Spune-l cu voce tare (sau scrie-l aici, ramane doar pe ecranul tau)'></textarea>" +
+    "<button class='btn' data-act='end'>[ SESSION COMPLETE ]</button>" +
+    "<button class='btn ghost' data-act='board'>[ INAPOI LA QUEST BOARD ]</button>", true);
+}
+
+function end(){
+  shake();
+  app.innerHTML = "<div class='top'><span>SESSION 001 / IRL</span><span>END</span></div><div class='screen end'>" +
+    "<p class='tag'>SESSION 001 / IRL</p>" +
+    "<h1><span class='glitch' data-t='Session closed.'>Session closed.</span></h1>" +
+    "<p class='lead'>Nimeni nu a castigat.<br><b>Session 002 ramane de vazut.</b></p>" +
+    "<button class='btn ghost' data-act='restart'>[ REPLAY ]</button></div>";
+}
+
+function restart(){
+  state = {done:{}, usedEvents:[], hiddenSeen:false, hiddenDone:false};
+  start();
+}
+
+/* ---------- routing ---------- */
+var actions = {rules:rules, board:board, event:event, final:final, end:end, restart:restart};
+app.addEventListener("click", function(e){
+  var el = e.target.closest("[data-act]");
+  if(!el) return;
+  var a = el.getAttribute("data-act"), id = parseInt(el.getAttribute("data-id"), 10);
+  if(a === "quest") quest(id);
+  else if(a === "complete") complete(id);
+  else if(a === "hpick") hpick(id);
+  else if(actions[a]) actions[a]();
+});
+
+start();
+})();
+</script>
+</body>
+</html>
